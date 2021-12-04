@@ -30,14 +30,25 @@ const drawTrunk = (height, length) => {
 
     console.log(
         new Array(rowSize).fill('')
-            .map((_, idx) => idx >= Math.floor((rowSize - length) / 2) && idx <= Math.ceil(rowSize - (rowSize - length) / 2) ? '|' : randomBackground())
+            .map((_, idx) => idx >= Math.floor((rowSize - length) / 2) && idx <= Math.ceil(rowSize - (rowSize - length) / 2) ? m('|') : randomBackground())
             .join('')
-    )
+    );
 
     drawTrunk(--height, length);
 }
 
-drawLevel(1, Math.floor(rowSize / 100 * 13));
-drawLevel(Math.floor(rowSize / 100 * 9), Math.floor(rowSize / 100 * 21));
-drawLevel(Math.floor(rowSize / 100 * 17), Math.floor(rowSize / 100 * 35));
-drawTrunk(Math.floor(rowSize / 20), Math.floor(rowSize / 10))
+const drawStar = () => {
+    console.log(
+        new Array(rowSize).fill('').map((el, idx) => idx == Math.floor(rowSize / 2) ? r('#') : randomBackground()).join('')
+    );
+}
+
+const makeTree = () => {
+    drawStar();
+    drawLevel(1, Math.floor(rowSize / 100 * 13));
+    drawLevel(Math.floor(rowSize / 100 * 9), Math.floor(rowSize / 100 * 21));
+    drawLevel(Math.floor(rowSize / 100 * 17), Math.floor(rowSize / 100 * 35));
+    drawTrunk(Math.floor(rowSize / 20), Math.floor(rowSize / 10));
+}
+
+makeTree();
